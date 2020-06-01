@@ -1,6 +1,7 @@
 <!DOCTYPE HTML5>
 <html lang="en">
   <title>Assignment 3 Base code Adapted from W3.CSS Template</title>
+  <!-- W3.CSS Template used from https://www.w3schools.com/images/w3schools.png -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
@@ -44,6 +45,14 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
+    var toData = [
+      { label: "303 Team", category: "Group" },
+      { label: "350 bros", category: "Group" },
+      { label: "351 suffering", category: "Group" },
+      { label: "Martin", category: "People" },
+      { label: "Anthony", category: "People" },
+      { label: "Raymond", category: "People" }
+    ];
     $(function() {
       //Auto complete Category functionality derived from
       //https://jqueryui.com/autocomplete/#categories
@@ -78,14 +87,7 @@
           });
         }
       });
-      var data = [
-        { label: "303 Team", category: "Group" },
-        { label: "350 bros", category: "Group" },
-        { label: "351 suffering", category: "Group" },
-        { label: "Martin", category: "People" },
-        { label: "Anthony", category: "People" },
-        { label: "Raymond", category: "People" }
-      ];
+      var data = toData;
 
       function split(val) {
         return val.split(/,\s*/);
@@ -107,11 +109,19 @@
           },
           select: function(event, ui) {
             var terms = split(this.value);
-            var value = ui.item.value;
-            console.log(data[0]);
+            var newValue = ui.item.value;
+            // console.log(newValue);
+            // console.log(terms);
 
             // remove the current input
             terms.pop();
+
+            //Check if newValue is already in input
+            for (var i = 0; i < terms.length; i++) {
+              if (terms[i] === newValue) {
+                return false;
+              }
+            }
             // add the selected item
             terms.push(ui.item.value);
             // add placeholder to get the comma-and-space at the end
@@ -156,18 +166,10 @@
       style="z-index:3;width:320px;height:80%;"
       id="mySidebar"
     >
-      <a
-        href="javascript:void(0)"
-        class="w3-bar-item w3-button w3-border-bottom w3-large"
-        ><i class="fa fa-edit"></i> &nbsp; Assignment 3 template <br />
-        based on
-        <span
-          ><img
-            src="https://www.w3schools.com/images/w3schools.png"
-            style="width:30%"
-        /></span>
-        template</a
-      >
+      <div class="w3-bar-item w3-border-bottom w3-large sidebar-team">
+        <i class="fas fa-users fa-3x"></i>
+        <label class="sidebar-team-label">Teams</label>
+      </div>
       <a
         href="javascript:void(0)"
         onclick="w3_close()"
@@ -239,9 +241,28 @@
       <a href="#" class="w3-bar-item w3-button"
         ><i class="fa fa-trash w3-margin-right"></i>Trash</a
       >
+      <!-- <div
+        class="user-profile w3-bar-block w3-collapse w3-white w3-animate-left w3-card"
+      >
+        <div class="user-profile-picture">
+          <i class="fas fa-user fa-2x"></i>
+        </div>
+        <div class="user-profile-name">
+          <label>Raymond</label>
+        </div>
+      </div> -->
     </nav>
 
-    <div class="user-profile"></div>
+    <div
+      class="user-profile w3-bar-block w3-collapse w3-white w3-animate-left w3-card"
+    >
+      <div class="user-profile-picture">
+        <i class="fas fa-user fa-2x"></i>
+      </div>
+      <div class="user-profile-name">
+        <label>Raymond Chiu</label>
+      </div>
+    </div>
 
     <!-- Breadcrumbs bar showing where you are in the project -->
     <div class="breadcrumbs-bar">
@@ -270,22 +291,19 @@
           <h2>Share File</h2>
         </div>
         <div class="w3-panel">
-          <label>To</label>
+          <label>To:</label>
           <input
             id="to-search"
             class="w3-input w3-border w3-margin-bottom"
             type="text"
           />
-          <!-- <label>From</label>
-          <input class="w3-input w3-border w3-margin-bottom" type="text" /> -->
-          <div class="ui-widget">
-            <label for="tags">Files: </label>
-            <input id="tags" size="50" />
-          </div>
+          <label>Files:</label>
+          <div class="w3-border w3-margin-bottom" style="height: 200"></div>
+          <label>Message:</label>
           <input
             class="w3-input w3-border w3-margin-bottom"
-            style="height:150px"
-            placeholder="Message"
+            style="height:50px"
+            placeholder="..."
           />
           <div class="w3-section">
             <a
