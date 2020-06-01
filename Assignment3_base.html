@@ -1,167 +1,475 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML5>
 <html lang="en">
-<title>Assignment 3 Base code Adapted from W3.CSS Template</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link href='https://fonts.googleapis.com/css?family=RobotoDraft' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><style>
-html,body,h1,h2,h3,h4,h5 {font-family: "RobotoDraft", "Roboto", sans-serif}
-.w3-bar-block .w3-bar-item {padding: 16px}
-</style>
-<body>
+  <title>Assignment 3 Base code Adapted from W3.CSS Template</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link
+    href="https://fonts.googleapis.com/css?family=RobotoDraft"
+    rel="stylesheet"
+    type="text/css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css"
+  /><style>
+    html,
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      font-family: "RobotoDraft", "Roboto", sans-serif;
+    }
+    .w3-bar-block .w3-bar-item {
+      padding: 16px;
+    }
+  </style>
+  <!-- JQuery UI library-->
+  <link
+    rel="stylesheet"
+    href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+  />
+  <link rel="stylesheet" href="/resources/demos/style.css" />
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+    $(function() {
+      //Auto complete Category functionality derived from
+      //https://jqueryui.com/autocomplete/#categories
+      //Auto complete multiple selection functionality derived from
+      //https://jqueryui.com/autocomplete/#multiple
+      $.widget("custom.catcomplete", $.ui.autocomplete, {
+        _create: function() {
+          this._super();
+          this.widget().menu(
+            "option",
+            "items",
+            "> :not(.ui-autocomplete-category)"
+          );
+        },
+        _renderMenu: function(ul, items) {
+          var that = this,
+            currentCategory = "";
+          $.each(items, function(index, item) {
+            var li;
+            if (item.category != currentCategory) {
+              ul.append(
+                "<li class='ui-autocomplete-category'>" +
+                  item.category +
+                  "</li>"
+              );
+              currentCategory = item.category;
+            }
+            li = that._renderItemData(ul, item);
+            if (item.category) {
+              li.attr("aria-label", item.category + " : " + item.label);
+            }
+          });
+        }
+      });
+      var data = [
+        { label: "303 Team", category: "Group" },
+        { label: "350 bros", category: "Group" },
+        { label: "351 suffering", category: "Group" },
+        { label: "Martin", category: "People" },
+        { label: "Anthony", category: "People" },
+        { label: "Raymond", category: "People" }
+      ];
 
-<!-- Side Navigation -->
-<nav class="w3-sidebar w3-bar-block w3-collapse w3-white w3-animate-left w3-card" style="z-index:3;width:320px;" id="mySidebar">
-  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-border-bottom w3-large"><i class="fa fa-edit"></i> &nbsp; Assignment 3 template <br/> based on
-  <span><img src="https://www.w3schools.com/images/w3schools.png" style="width:30%"></span> template</a>
-  <a href="javascript:void(0)" onclick="w3_close()" title="Close Sidemenu" 
-  class="w3-bar-item w3-button w3-hide-large w3-large">Close <i class="fa fa-remove"></i></a>
-  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-dark-grey w3-button w3-hover-black w3-left-align" onclick="document.getElementById('id01').style.display='block'">Share File <i class="w3-padding fa fa-pencil"></i></a>
-  <a id="myBtn" onclick="myFunc('Demo1')" href="javascript:void(0)" class="w3-bar-item w3-button"><i class="fa fa-inbox w3-margin-right"></i>Files (3)<i class="fa fa-caret-down w3-margin-left"></i></a>
-  <div id="Demo1" class="w3-hide w3-animate-left">
-    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey" onclick="doShare('File1');w3_close();" id="firstTab">
-      <div class="w3-container">
-        <img class="w3-round w3-margin-right" src="./fileIcon3.png" style="width:15%;"><span class="w3-opacity w3-large">File 1</span>
-        <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</h6>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-      </div>
-    </a>
-     <a href="javascript:void(0)" class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey" onclick="doShare('File2');w3_close();">
-      <div class="w3-container">
-        <img class="w3-round w3-margin-right" src="./fileIcon5.png" style="width:15%;"><span class="w3-opacity w3-large">File 2</span>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-      </div>
-    </a>
-    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey" onclick="doShare('File3');w3_close();">
-      <div class="w3-container">
-        <img class="w3-round w3-margin-right" src="./fileIcon2.png" style="width:15%;"><span class="w3-opacity w3-large">File 3</span>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-      </div>
-    </a>
-  </div>
-  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-paper-plane w3-margin-right"></i>Shared Files</a>
-  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-hourglass-end w3-margin-right"></i>Draft Files</a>
-  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-trash w3-margin-right"></i>Trash</a>
-</nav>
+      function split(val) {
+        return val.split(/,\s*/);
+      }
+      function extractLast(term) {
+        return split(term).pop();
+      }
 
-<!-- Modal that pops up when you click on "Share File" -->
-<div id="id01" class="w3-modal" style="z-index:4">
-  <div class="w3-modal-content w3-animate-zoom">
-    <div class="w3-container w3-padding w3-red">
-       <span onclick="document.getElementById('id01').style.display='none'"
-       class="w3-button w3-red w3-right w3-xxlarge"><i class="fa fa-remove"></i></span>
-      <h2>Share File</h2>
+      $("#to-search")
+        .catcomplete({
+          minLength: 0,
+          source: function(request, response) {
+            // delegate back to autocomplete, but extract the last term
+            response($.ui.autocomplete.filter(data, extractLast(request.term)));
+          },
+          focus: function() {
+            // prevent value inserted on focus
+            return false;
+          },
+          select: function(event, ui) {
+            var terms = split(this.value);
+            var value = ui.item.value;
+            console.log(data[0]);
+
+            // remove the current input
+            terms.pop();
+            // add the selected item
+            terms.push(ui.item.value);
+            // add placeholder to get the comma-and-space at the end
+            terms.push("");
+            this.value = terms.join(", ");
+
+            return false;
+          }
+        })
+        .on("keydown", function(event) {
+          if (
+            event.keyCode === $.ui.keyCode.TAB &&
+            $(this).catcomplete("instance").menu.active
+          ) {
+            event.preventDefault();
+          }
+        });
+    });
+  </script>
+  <body>
+    <!-- Top Navigation -->
+    <div class="top-nav">
+      <div class="logo">
+        Assignment 3
+      </div>
+      <div class="search">
+        <div class="tooltip">
+          <i class="fas fa-search fa-lg"></i>
+          <span class="tooltiptext">Search</span>
+        </div>
+        <input class="search-field" type="text" />
+      </div>
+      <div class="settings tooltip">
+        <i class="fas fa-cog fa-lg"></i>
+        <span class="tooltiptext">Settings</span>
+      </div>
     </div>
-    <div class="w3-panel">
-      <label>To</label>
-      <input class="w3-input w3-border w3-margin-bottom" type="text">
-      <label>From</label>
-      <input class="w3-input w3-border w3-margin-bottom" type="text">
-      <label>File</label>
-      <input class="w3-input w3-border w3-margin-bottom" type="text">
-      <input class="w3-input w3-border w3-margin-bottom" style="height:150px" placeholder="Message">
-      <div class="w3-section">
-        <a class="w3-button w3-red" onclick="document.getElementById('id01').style.display='none'">Cancel  <i class="fa fa-remove"></i></a>
-        <a class="w3-button w3-light-grey w3-right" onclick="document.getElementById('id01').style.display='none'">Share  <i class="fa fa-paper-plane"></i></a> 
-      </div>    
+
+    <!-- Side Navigation -->
+    <nav
+      class="w3-sidebar w3-bar-block w3-collapse w3-white w3-animate-left w3-card"
+      style="z-index:3;width:320px;height:80%;"
+      id="mySidebar"
+    >
+      <a
+        href="javascript:void(0)"
+        class="w3-bar-item w3-button w3-border-bottom w3-large"
+        ><i class="fa fa-edit"></i> &nbsp; Assignment 3 template <br />
+        based on
+        <span
+          ><img
+            src="https://www.w3schools.com/images/w3schools.png"
+            style="width:30%"
+        /></span>
+        template</a
+      >
+      <a
+        href="javascript:void(0)"
+        onclick="w3_close()"
+        title="Close Sidemenu"
+        class="w3-bar-item w3-button w3-hide-large w3-large"
+        >Close <i class="fa fa-remove"></i
+      ></a>
+      <a
+        id="myBtn"
+        onclick="myFunc('Demo1')"
+        href="javascript:void(0)"
+        class="w3-bar-item w3-button"
+        ><i class="fa fa-inbox w3-margin-right"></i>Files (3)<i
+          class="fa fa-caret-down w3-margin-left"
+        ></i
+      ></a>
+      <div id="Demo1" class="w3-hide w3-animate-left">
+        <a
+          href="javascript:void(0)"
+          class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
+          onclick="doShare('File1');w3_close();"
+          id="firstTab"
+        >
+          <div class="w3-container">
+            <img
+              class="w3-round w3-margin-right"
+              src="./fileIcon3.png"
+              style="width:15%;"
+            /><span class="w3-opacity w3-large">File 1</span>
+            <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</h6>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+          </div>
+        </a>
+        <a
+          href="javascript:void(0)"
+          class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
+          onclick="doShare('File2');w3_close();"
+        >
+          <div class="w3-container">
+            <img
+              class="w3-round w3-margin-right"
+              src="./fileIcon5.png"
+              style="width:15%;"
+            /><span class="w3-opacity w3-large">File 2</span>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+          </div>
+        </a>
+        <a
+          href="javascript:void(0)"
+          class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
+          onclick="doShare('File3');w3_close();"
+        >
+          <div class="w3-container">
+            <img
+              class="w3-round w3-margin-right"
+              src="./fileIcon2.png"
+              style="width:15%;"
+            /><span class="w3-opacity w3-large">File 3</span>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+          </div>
+        </a>
+      </div>
+      <a href="#" class="w3-bar-item w3-button"
+        ><i class="fa fa-paper-plane w3-margin-right"></i>Shared Files</a
+      >
+      <a href="#" class="w3-bar-item w3-button"
+        ><i class="fa fa-hourglass-end w3-margin-right"></i>Draft Files</a
+      >
+      <a href="#" class="w3-bar-item w3-button"
+        ><i class="fa fa-trash w3-margin-right"></i>Trash</a
+      >
+    </nav>
+
+    <div class="user-profile"></div>
+
+    <!-- Breadcrumbs bar showing where you are in the project -->
+    <div class="breadcrumbs-bar">
+      <div class="breadcrumbs">
+        <a class="breadcrumbs-link" href="#">303 Team</a>
+        >
+        <a class="breadcrumbs-link" href="#">Project 1</a>
+      </div>
+      <div class="breadcrumbs-bar-icons">
+        <div class="tooltip">
+          <i class="far fa-clipboard fa-lg"></i>
+          <span class="tooltiptext">Changelog</span>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<!-- Overlay effect when opening the side navigation on small screens -->
-<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="Close Sidemenu" id="myOverlay"></div>
+    <!-- Modal that pops up when you click on "Share File"------------------- -->
+    <div id="id01" class="w3-modal" style="z-index:4">
+      <div class="w3-modal-content w3-animate-zoom">
+        <div class="w3-container w3-padding w3-red">
+          <span
+            onclick="document.getElementById('id01').style.display='none'"
+            class="w3-button w3-red w3-right w3-xxlarge"
+            ><i class="fa fa-remove"></i
+          ></span>
+          <h2>Share File</h2>
+        </div>
+        <div class="w3-panel">
+          <label>To</label>
+          <input
+            id="to-search"
+            class="w3-input w3-border w3-margin-bottom"
+            type="text"
+          />
+          <!-- <label>From</label>
+          <input class="w3-input w3-border w3-margin-bottom" type="text" /> -->
+          <div class="ui-widget">
+            <label for="tags">Files: </label>
+            <input id="tags" size="50" />
+          </div>
+          <input
+            class="w3-input w3-border w3-margin-bottom"
+            style="height:150px"
+            placeholder="Message"
+          />
+          <div class="w3-section">
+            <a
+              class="w3-button w3-red"
+              onclick="document.getElementById('id01').style.display='none'"
+              >Cancel <i class="fa fa-remove"></i
+            ></a>
+            <a
+              class="w3-button w3-light-grey w3-right"
+              onclick="document.getElementById('id01').style.display='none'"
+              >Share <i class="fa fa-paper-plane"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<!-- Page content -->
-<div class="w3-main" style="margin-left:320px;">
-<i class="fa fa-bars w3-button w3-white w3-hide-large w3-xlarge w3-margin-left w3-margin-top" onclick="w3_open()"></i>
-<a href="javascript:void(0)" class="w3-hide-large w3-red w3-button w3-right w3-margin-top w3-margin-right" onclick="document.getElementById('id01').style.display='block'"><i class="fa fa-pencil"></i></a>
+    <!-- Overlay effect when opening the side navigation on small screens -->
+    <div
+      class="w3-overlay w3-hide-large w3-animate-opacity"
+      onclick="w3_close()"
+      style="cursor:pointer"
+      title="Close Sidemenu"
+      id="myOverlay"
+    ></div>
 
-<div id="File1" class="w3-container file">
-  <br>
-  <img class="w3-round  w3-animate-top" src="./fileIcon3.png" style="width:20%;">
-  <h5 class="w3-opacity">File 1</h5>
-  <h4><i class="fa fa-clock-o"></i> File 1, Sep 27, 2015.</h4>
-  <a class="w3-button w3-light-grey" href="#">Share<i class="w3-margin-left fa fa-mail-reply"></i></a>
-  <a class="w3-button w3-light-grey" href="#">Delete<i class="w3-margin-left fa fa-arrow-right"></i></a>
-  <hr>
-  
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
- 
-</div>
+    <!-- Circle icons on the bottom right -->
+    <div class="circle-icons">
+      <div id="button-folder" onClick="" class="circle tooltip">
+        <i class="fas fa-folder fa-3x"></i>
+        <span class="tooltiptext">Create folder</span>
+      </div>
+      <div id="button-trash" onClick="" class="circle trash tooltip">
+        <i class="fas fa-trash fa-3x"></i>
+        <span class="tooltiptext">Put in trash</span>
+      </div>
+      <div
+        id="button-share"
+        onclick="document.getElementById('id01').style.display='block'"
+        class="circle share tooltip"
+      >
+        <i class="fas fa-share fa-3x"></i>
+        <span class="tooltiptext">Share files</span>
+      </div>
+    </div>
 
-<div id="File2" class="w3-container file">
-  <br>
-  <img class="w3-round w3-animate-top" src="./fileIcon5.png" style="width:20%;">
-  <h5 class="w3-opacity">File 2</h5>
-  <h4><i class="fa fa-clock-o"></i> File 2, Sep 25, 2015.</h4>
-  <a class="w3-button w3-light-grey">Share<i class="w3-margin-left fa fa-mail-reply"></i></a>
-  <a class="w3-button w3-light-grey">Delete<i class="w3-margin-left fa fa-arrow-right"></i></a>
-  <hr>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <!-- Page content -->
+    <div class="w3-main" style="margin-left:320px;">
+      <i
+        class="fa fa-bars w3-button w3-white w3-hide-large w3-xlarge w3-margin-left w3-margin-top"
+        onclick="w3_open()"
+      ></i>
+      <a
+        href="javascript:void(0)"
+        class="w3-hide-large w3-red w3-button w3-right w3-margin-top w3-margin-right"
+        onclick="document.getElementById('id01').style.display='block'"
+        ><i class="fa fa-pencil"></i
+      ></a>
 
-</div>
+      <div id="File1" class="w3-container file">
+        <br />
+        <img
+          class="w3-round  w3-animate-top"
+          src="./fileIcon3.png"
+          style="width:20%;"
+        />
+        <h5 class="w3-opacity">File 1</h5>
+        <h4><i class="fa fa-clock-o"></i> File 1, Sep 27, 2015</h4>
+        <a class="w3-button w3-light-grey" href="#"
+          >Share<i class="w3-margin-left fa fa-mail-reply"></i
+        ></a>
+        <a class="w3-button w3-light-grey" href="#"
+          >Delete<i class="w3-margin-left fa fa-arrow-right"></i
+        ></a>
+        <hr />
 
-<div id="File3" class="w3-container file">
-  <br>
-  <img class="w3-round w3-animate-top" src="./fileIcon2.png" style="width:20%;">
-  <h5 class="w3-opacity">File 3</h5>
-  <h4><i class="fa fa-clock-o"></i> File 3, Sep 23, 2015.</h4>
-  <a class="w3-button w3-light-grey">Share<i class="w3-margin-left fa fa-mail-reply"></i></a>
-  <a class="w3-button w3-light-grey">Delete<i class="w3-margin-left fa fa-arrow-right"></i></a>
-  <hr>
- 
-</div>
-     
-</div>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est
+          laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt
+          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat.
+        </p>
+      </div>
 
-<script>
-var openInbox = document.getElementById("myBtn");
-openInbox.click();
+      <div id="File2" class="w3-container file">
+        <br />
+        <img
+          class="w3-round w3-animate-top"
+          src="./fileIcon5.png"
+          style="width:20%;"
+        />
+        <h5 class="w3-opacity">File 2</h5>
+        <h4><i class="fa fa-clock-o"></i> File 2, Sep 25, 2015.</h4>
+        <a class="w3-button w3-light-grey"
+          >Share<i class="w3-margin-left fa fa-mail-reply"></i
+        ></a>
+        <a class="w3-button w3-light-grey"
+          >Delete<i class="w3-margin-left fa fa-arrow-right"></i
+        ></a>
+        <hr />
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est
+          laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt
+          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat.
+        </p>
+      </div>
 
-function w3_open() {
-  document.getElementById("mySidebar").style.display = "block";
-  document.getElementById("myOverlay").style.display = "block";
-}
+      <div id="File3" class="w3-container file">
+        <br />
+        <img
+          class="w3-round w3-animate-top"
+          src="./fileIcon2.png"
+          style="width:20%;"
+        />
+        <h5 class="w3-opacity">File 3</h5>
+        <h4><i class="fa fa-clock-o"></i> File 3, Sep 23, 2015.</h4>
+        <a class="w3-button w3-light-grey"
+          >Share<i class="w3-margin-left fa fa-mail-reply"></i
+        ></a>
+        <a class="w3-button w3-light-grey"
+          >Delete<i class="w3-margin-left fa fa-arrow-right"></i
+        ></a>
+        <hr />
+      </div>
+    </div>
 
-function w3_close() {
-  document.getElementById("mySidebar").style.display = "none";
-  document.getElementById("myOverlay").style.display = "none";
-}
+    <script>
+      var openInbox = document.getElementById("myBtn");
+      openInbox.click();
 
-function myFunc(id) {
-  var x = document.getElementById(id);
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show"; 
-    x.previousElementSibling.className += " w3-red";
-  } else { 
-    x.className = x.className.replace(" w3-show", "");
-    x.previousElementSibling.className = 
-    x.previousElementSibling.className.replace(" w3-red", "");
-  }
-}
+      function w3_open() {
+        document.getElementById("mySidebar").style.display = "block";
+        document.getElementById("myOverlay").style.display = "block";
+      }
 
-doShare("File1")
-function doShare(fileName) {
-  var i;
-  var x = document.getElementsByClassName("file");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  x = document.getElementsByClassName("test");
-  for (i = 0; i < x.length; i++) {
-    x[i].className = x[i].className.replace(" w3-light-grey", "");
-  }
-  document.getElementById(fileName).style.display = "block";
-  event.currentTarget.className += " w3-light-grey";
-}
-</script>
+      function w3_close() {
+        document.getElementById("mySidebar").style.display = "none";
+        document.getElementById("myOverlay").style.display = "none";
+      }
 
-<script>
-var openTab = document.getElementById("firstTab");
-openTab.click();
-</script>
+      function myFunc(id) {
+        var x = document.getElementById(id);
+        if (x.className.indexOf("w3-show") == -1) {
+          x.className += " w3-show";
+          x.previousElementSibling.className += " w3-red";
+        } else {
+          x.className = x.className.replace(" w3-show", "");
+          x.previousElementSibling.className = x.previousElementSibling.className.replace(
+            " w3-red",
+            ""
+          );
+        }
+      }
 
-</body>
-</html> 
+      doShare("File1");
+      function doShare(fileName) {
+        var i;
+        var x = document.getElementsByClassName("file");
+        for (i = 0; i < x.length; i++) {
+          x[i].style.display = "none";
+        }
+        x = document.getElementsByClassName("test");
+        for (i = 0; i < x.length; i++) {
+          x[i].className = x[i].className.replace(" w3-light-grey", "");
+        }
+        document.getElementById(fileName).style.display = "block";
+        event.currentTarget.className += " w3-light-grey";
+      }
+    </script>
 
+    <script>
+      var openTab = document.getElementById("firstTab");
+      openTab.click();
+    </script>
+  </body>
+</html>
