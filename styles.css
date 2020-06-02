@@ -35,6 +35,10 @@
   font-size: 1.5rem;
 }
 
+.icon {
+  cursor: pointer;
+}
+
 /* BREADCRUMB BAR ELEMENTS */
 
 .breadcrumbs-bar {
@@ -47,10 +51,10 @@
 
 .breadcrumbs {
   margin: 0 auto;
-  width: 30%;
+  width: 60%;
   height: 100%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   font-weight: 700;
   font-size: 24px;
@@ -59,6 +63,9 @@
 .breadcrumbs-link {
   text-decoration: none;
   padding: 5px 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .breadcrumbs-link:hover {
@@ -104,8 +111,9 @@
   opacity: 1;
 }
 
-/*Share Menu*/
+/**Share Menu**/
 
+/* To search*/
 .ui-autocomplete-category {
   font-weight: bold;
   padding: 0.2em 0.4em;
@@ -113,15 +121,42 @@
   line-height: 1.5;
 }
 
-/* input[type="file"] {
+/* File upload */
+.uploaded-file {
   display: none;
-} */
+  border: 1 solid blue;
+  height: 160px;
+  width: 7.5em;
+  margin: 25px 10px;
+  text-align: center;
+  position: relative;
+}
+
+.uploaded-file img {
+  max-width: 7.5em;
+}
+
+.uploaded-file i {
+  font-size: 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.uploaded-file i:hover {
+  color: red;
+}
 
 .custom-file-upload {
   border: 1px solid #ccc;
   display: inline-block;
   padding: 6px 12px;
   cursor: pointer;
+}
+
+input[type="file"] {
+  display: none;
 }
 
 /*Bottom right action icons*/
@@ -153,15 +188,14 @@
 
 /* USER PROFILE ON THE SIDEBAR */
 .user-profile {
+  overflow: hidden;
   position: absolute;
-  z-index: 3;
   display: flex;
   align-items: center;
+  width: 100%;
+  height: 100%;
   background-color: #f9f9f9;
   border: 1px solid #e7e7e7;
-  height: 13%;
-  width: 320px;
-  bottom: 0px;
 }
 
 .user-profile-picture {
@@ -169,6 +203,11 @@
   border: 1px solid #e7e7e7;
   padding: 20px;
   border-radius: 25%;
+}
+
+.user-profile-picture:hover {
+  background-color: #e7e7e7;
+  cursor: pointer;
 }
 
 .user-profile-name {
@@ -187,4 +226,44 @@
   margin-left: 10px;
   font-weight: bold;
   font-size: 20px;
+}
+
+/* PROJECT ICONS ON THE SIDEBAR */
+
+.project {
+  margin-right: 10px;
+}
+
+/* RECENTLY USED THUMBNAILS */
+.recently-used-items {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.recently-used-item {
+  cursor: pointer;
+  width: 30%;
+}
+
+.recently-used-item:active {
+  background-color: #e7e7e7;
+}
+
+.thumbnail-border {
+  display: flex;
+  justify-content: center;
+  background-color: #e7e7e7;
+  border-radius: 5px;
+}
+
+.thumbnail {
+  object-fit: cover;
+  margin: 0 auto;
+  max-width: 80%;
+  height: 100px;
+}
+
+.label {
+  width: 100%;
 }
