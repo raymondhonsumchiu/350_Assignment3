@@ -1,6 +1,6 @@
 <!DOCTYPE HTML5>
 <html lang="en">
-  <title>Assignment 3 Base code Adapted from W3.CSS Template</title>
+  <title>Assignment 3 adapted from W3.CSS Template</title>
   <!-- W3.CSS Template used from https://www.w3schools.com/images/w3schools.png -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -46,12 +46,13 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
     var toData = [
-      { label: "303 Team", category: "Group" },
-      { label: "350", category: "Group" },
-      { label: "351", category: "Group" },
-      { label: "Martin@email.com", category: "People" },
-      { label: "Anthony@email.com", category: "People" },
-      { label: "Raymond@email.com", category: "People" }
+      { label: "TGIP", category: "303 Team" },
+      { label: "5DPC", category: "303 Team" },
+      { label: "Assignment 2", category: "350" },
+      { label: "Assignment 3", category: "350" },
+      { label: "Assignment", category: "Anthony" },
+      { label: "Martin@email.com", category: "Email" },
+      { label: "Anthony@email.com", category: "Email" }
     ];
     $(function() {
       //Auto complete Category functionality derived from
@@ -104,7 +105,6 @@
             response($.ui.autocomplete.filter(data, extractLast(request.term)));
           },
           focus: function() {
-            // prevent value inserted on focus
             return false;
           },
           select: function(event, ui) {
@@ -129,6 +129,9 @@
             return false;
           }
         })
+        .click(function() {
+          $(this).catcomplete("search");
+        })
         .on("keydown", function(event) {
           if (
             event.keyCode === $.ui.keyCode.TAB &&
@@ -140,6 +143,30 @@
     });
   </script>
   <body>
+    <div id="popup" class="w3-modal popup" style="z-index: 50;">
+        <div class="w3-modal-content w3-animate-zoom" style="width:25em;">
+          <div class="w3-container w3-padding w3-light-blue" style="display:flex; justify-content: flex-end">
+              <a
+              class="close-button w3-xlarge"
+              onclick="closeUnimplementedPopup()"
+              style="top:10px; right:10px;"
+            ><i class="fa fa-remove"></i>
+            </a>
+          </div>
+          <div class="w3-panel">
+              <p class="w3-center">This feature has not been implemented.</p>
+            <div class="w3-section">
+              <a
+                class="w3-button w3-light-blue w3-right"
+                onclick="closeUnimplementedPopup()"
+                style="margin-bottom:10px;"
+                >Ok
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
     <!-- Top Navigation -->
     <div class="top-nav w3-light-blue">
       <div class="logo">
@@ -150,10 +177,10 @@
           <i class="fas fa-search fa-lg icon"></i>
           <span class="tooltiptext">Search</span>
         </div>
-        <input class="w3-white search-field" type="text" />
+        <input class="w3-white w3-input search-field" type="text" />
       </div>
       <div class="settings tooltip">
-        <i class="fas fa-cog fa-2x icon"></i>
+        <i class="fas fa-cog fa-2x icon" onClick="openUnimplementedPopup()"></i>
         <span class="tooltiptext">Settings</span>
       </div>
     </div>
@@ -164,8 +191,7 @@
       style="z-index:3;width:320px;height:80%;"
       id="mySidebar"
     >
-
-    <!-- Large Teams label -->
+      <!-- Large Teams label -->
       <div class="w3-bar-item w3-border-bottom w3-large sidebar-team">
         <i class="fas fa-users fa-3x"></i>
         <label class="sidebar-team-label">Teams</label>
@@ -186,7 +212,7 @@
         onclick="myFunc('Demo1')"
         href="javascript:void(0)"
         class="w3-bar-item w3-button"
-        ><i class="fa fa-users w3-margin-right w3-large"></i>303 Team (2)<i
+        ><i class="fa fa-users w3-margin-right w3-large"></i>303 Team<i
           class="fa fa-caret-down w3-margin-left"
         ></i
       ></a>
@@ -194,11 +220,10 @@
         <a
           href="javascript:void(0)"
           class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
-          onclick="doShare('Project1', '303 Team', 'TGIP');w3_close();"
+          onclick="doShare('Project1', '303 Team', 'TGIP',this);w3_close();"
           id="firstTab"
         >
-
-        <!-- 303 Team's two projects - TGIP and 5DPC -->
+          <!-- 303 Team's two projects - TGIP and 5DPC -->
           <div class="w3-container">
             <i class="fas fa-box-open project"></i>
             <span class="w3-opacity w3-small">TGIP</span>
@@ -207,7 +232,7 @@
         <a
           href="javascript:void(0)"
           class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
-          onclick="doShare('Project2', '303 Team', '5DPC');w3_close();"
+          onclick="doShare('Project2', '303 Team', '5DPC',this);w3_close();"
         >
           <div class="w3-container">
             <i class="fas fa-box-open project"></i>
@@ -219,8 +244,7 @@
           class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
           onclick=""
         >
-
-        <!-- Sidebar item to add a new project to 303 team (functionality not implenented) -->
+          <!-- Sidebar item to add a new project to 303 team (functionality not implenented) -->
           <div class="w3-container">
             <i class="fas fa-plus project"></i>
             <span class="w3-opacity w3-small">Add project...</span>
@@ -234,7 +258,7 @@
         onclick="myFunc('Demo2')"
         href="javascript:void(0)"
         class="w3-bar-item w3-button"
-        ><i class="fa fa-users w3-margin-right w3-large"></i>350 (2)
+        ><i class="fa fa-users w3-margin-right w3-large"></i>350
         <i class="fa fa-caret-down w3-margin-left"></i
       ></a>
       <div id="Demo2" class="w3-hide w3-animate-left">
@@ -303,10 +327,12 @@
       <!-- INDIVIDUAL USERS SIDEBAR e.g. Martin, Anthony. 
         This is where the user Raymond Chiu can share with one other person -->
 
-      <div class="w3-bar-item w3-border-top w3-border-bottom w3-large sidebar-team">
-          <i class="fas fa-user fa-3x"></i>
-          <label class="sidebar-team-label">People</label>
-        </div>
+      <div
+        class="w3-bar-item w3-border-top w3-border-bottom w3-large sidebar-team"
+      >
+        <i class="fas fa-user fa-3x"></i>
+        <label class="sidebar-team-label">People</label>
+      </div>
       <a
         id="myBtn3"
         onclick="myFunc('Demo4')"
@@ -339,6 +365,16 @@
         ></i
       ></a>
       <div id="Demo5" class="w3-hide w3-animate-left">
+        <a
+          href="javascript:void(0)"
+          class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
+          onclick="doShare('Project5', 'Anthony', 'Assignment');w3_close();"
+        >
+          <div class="w3-container">
+            <i class="fas fa-box-open project"></i>
+            <span class="w3-opacity w3-small">Assignment</span>
+          </div>
+        </a>
         <a
           href="javascript:void(0)"
           class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
@@ -382,8 +418,10 @@
           <label>Raymond Chiu</label>
         </div>
         <div class="settings tooltip">
-          <i class="fas fa-cog fa-lg icon w3-margin-left"></i>
-          <span class="tooltiptext tooltiptext-user-settings">User Settings</span>
+          <i class="fas fa-cog fa-lg icon w3-margin-left" onClick="openUnimplementedPopup()"></i>
+          <span class="tooltiptext tooltiptext-user-settings"
+            >User Settings</span
+          >
         </div>
       </div>
     </div>
@@ -401,7 +439,7 @@
       </div>
       <div class="breadcrumbs-bar-icons">
         <div class="tooltip">
-          <i class="far fa-clipboard fa-2x icon"></i>
+          <i class="far fa-clipboard fa-2x icon" onClick="openUnimplementedPopup()"></i>
           <span class="tooltiptext">Changelog</span>
         </div>
       </div>
@@ -410,13 +448,13 @@
     <!-- Modal that pops up when you click on "Share File"------------------- -->
     <div id="id01" class="w3-modal" style="z-index:4">
       <div class="w3-modal-content w3-animate-zoom">
-        <div class="w3-container w3-padding w3-blue">
+        <div class="w3-container w3-padding w3-light-blue">
           <span
-            onclick="document.getElementById('id01').style.display='none'"
-            class="w3-button w3-blue w3-right w3-xxlarge"
+            onclick="closeShare()"
+            class="close-button w3-right w3-xxlarge"
             ><i class="fa fa-remove"></i
           ></span>
-          <h2>Share File</h2>
+          <h2>Share</h2>
         </div>
         <div class="w3-panel">
           <label>To:</label>
@@ -424,13 +462,12 @@
             id="to-search"
             class="w3-input w3-border w3-margin-bottom"
             type="text"
-            placeholder="Start typing..."
+            placeholder="Start typing a project..."
           />
           <label>Files:</label>
-          <label for="file-upload" class="custom-file-upload">
+          <label for="file-upload" class="w3-light-grey custom-file-upload">
             Upload
-            <i class="fa fa-upload"></i>
-            <i class="fa fa-file-upload"></i>
+            <i class="fa fa-cloud-upload-alt"></i>
           </label>
           <input id="file-upload" type="file" multiple />
           <div
@@ -439,61 +476,60 @@
           >
             <div id="up-file-1" class="uploaded-file">
               <i class="fa fa-remove" onclick="closeFile(this)"></i>
-              <img src="./fileIcon3.png" />
+              <img src="./Upload-file.PNG" />
               <label>File 1</label>
             </div>
             <div id="up-file-2" class="uploaded-file">
               <i class="fa fa-remove" onclick="closeFile(this)"></i>
-              <img src="./fileIcon5.png" />
+              <img src="./Upload-file.PNG" />
               <label>File 2</label>
             </div>
             <div id="up-file-3" class="uploaded-file">
               <i class="fa fa-remove" onclick="closeFile(this)"></i>
-              <img src="./fileIcon3.png" />
+              <img src="./Upload-file.PNG" />
               <label>File 3</label>
             </div>
             <div id="up-file-4" class="uploaded-file">
               <i class="fa fa-remove" onclick="closeFile(this)"></i>
-              <img src="./fileIcon5.png" />
+              <img src="./Upload-file.PNG" />
               <label>File 4</label>
             </div>
             <div id="up-file-5" class="uploaded-file">
               <i class="fa fa-remove" onclick="closeFile(this)"></i>
-              <img src="./fileIcon3.png" />
+              <img src="./Upload-file.PNG" />
               <label>File 5</label>
             </div>
             <div id="up-file-6" class="uploaded-file">
               <i class="fa fa-remove" onclick="closeFile(this)"></i>
-              <img src="./fileIcon5.png" />
+              <img src="./Upload-file.PNG" />
               <label>File 6</label>
             </div>
             <div id="up-file-7" class="uploaded-file">
               <i class="fa fa-remove" onclick="closeFile(this)"></i>
-              <img src="./fileIcon3.png" />
+              <img src="./Upload-file.PNG" />
               <label>File 7</label>
             </div>
             <div id="up-file-8" class="uploaded-file">
               <i class="fa fa-remove" onclick="closeFile(this)"></i>
-              <img src="./fileIcon5.png" />
+              <img src="./Upload-file.PNG" />
               <label>File 8</label>
             </div>
           </div>
           <label>Message:</label>
           <input
             class="w3-input w3-border w3-margin-bottom"
-            style="height:50px"
+            style="height:50px;"
             placeholder="..."
           />
           <div class="w3-section">
-            <a class="w3-button w3-blue" onclick="closeShare()"
+            <a class="w3-button w3-light-grey" onclick="closeShare()"
               >Cancel <i class="fa fa-remove"></i
             ></a>
             <div class="w3-right">
               <label id="share-warning" style="color: red; display: none;"
-                >Either no person/group selected or no files have been
-                uploaded</label
+                >No receiver selected or No uploaded files</label
               >
-              <a class="w3-button w3-light-grey " onclick="openConfirm()"
+              <a class="w3-button w3-light-blue" onclick="openConfirm()"
                 >Share <i class="fa fa-paper-plane"></i
               ></a>
             </div>
@@ -505,18 +541,43 @@
     <!-- Share Confirmation Modal-->
     <div id="confirmation" class="w3-modal" style="z-index: 50;">
       <div class="w3-modal-content w3-animate-zoom" style="width: 50em;">
-        <div class="w3-container w3-padding w3-blue">
+        <div class="w3-container w3-padding w3-light-blue">
           <h2>Confirmation</h2>
         </div>
         <div class="w3-panel">
+          Are you sure you want to upload these files?
           <div class="w3-section">
             <a
-              class="w3-button w3-blue"
+              class="w3-button w3-light-grey"
               onclick="document.getElementById('confirmation').style.display='none'"
               >Cancel <i class="fa fa-remove"></i
             ></a>
-            <a class="w3-button w3-light-grey w3-right" onclick=""
+            <a
+              class="w3-button w3-light-blue w3-right"
+              onclick="document.getElementById('confirmation').style.display='none';
+              document.getElementById('id01').style.display='none';
+              document.getElementById('success').style.display='block'"
               >Yes <i class="fa fa-check"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Successful share popup-->
+    <div id="success" class="w3-modal" style="z-index: 50;">
+      <div class="w3-modal-content w3-animate-zoom" style="width: 50em;">
+        <div class="w3-container w3-padding w3-light-blue">
+          <h2>Success!</h2>
+        </div>
+        <div class="w3-panel">
+          Files have been uploaded and shared successfully.
+          <div class="w3-section">
+            <a
+              class="w3-button w3-light-blue w3-right"
+              style="margin-bottom: 10px;"
+              onclick="closeSuccess()"
+              >Done <i class="fa fa-check"></i
             ></a>
           </div>
         </div>
@@ -526,17 +587,17 @@
     <!-- Overlay effect when opening the side navigation on small screens -->
     <div
       class="w3-overlay w3-hide-large w3-animate-opacity"
-      onclick="w3_close()"
+      onclick="w3_close(); closeUnimplementedPopup();"
       id="myOverlay"
     ></div>
 
     <!-- Circle icons on the bottom right -->
     <div class="circle-icons">
-      <div id="button-folder" onClick="" class="circle tooltip">
+      <div id="button-folder" onClick="openUnimplementedPopup()" class="circle tooltip">
         <i class="fas fa-folder fa-3x"></i>
         <span class="tooltiptext">Create folder</span>
       </div>
-      <div id="button-trash" onClick="" class="circle trash tooltip">
+      <div id="button-trash" onClick="openUnimplementedPopup()" class="circle trash tooltip">
         <i class="fas fa-trash fa-3x"></i>
         <span class="tooltiptext">Put in trash</span>
       </div>
@@ -552,7 +613,6 @@
 
     <!-- Page content -->
     <div class="w3-main" style="margin-left:320px;">
-
       <!-- This div is for the project TGIP, accessible when you
       select 303 Team > TGIP -->
       <div id="Project1" class="w3-container file w3-animate-opacity">
@@ -574,20 +634,14 @@
         <div class="recently-used-items">
           <div class="recently-used-item w3-card">
             <div class="thumbnail-border">
-              <img
-                class="thumbnail w3-round"
-                src="./excel-image.PNG"
-              />
+              <img class="thumbnail w3-round" src="./excel-image.PNG" />
             </div>
             <h5 class="w3-opacity w3-center">Finances.xlsx</h5>
             <p class="w3-small w3-center">Last viewed today</p>
           </div>
           <div class="recently-used-item w3-card">
             <div class="thumbnail-border">
-              <img
-                class="thumbnail w3-round"
-                src="./pdf-image3.PNG"
-              />
+              <img class="thumbnail w3-round" src="./pdf-image3.PNG" />
             </div>
             <h5 class="w3-opacity w3-center">TGIP Report.pdf</h5>
             <p class="label w3-small w3-center">
@@ -596,10 +650,7 @@
           </div>
           <div class="recently-used-item w3-card">
             <div class="thumbnail-border">
-              <img
-                class=" thumbnail w3-round"
-                src="./pdf-image4.PNG"
-              />
+              <img class=" thumbnail w3-round" src="./pdf-image4.PNG" />
             </div>
             <h5 class="w3-opacity w3-center">TGIP Brief.pdf</h5>
             <p class="w3-small w3-center">Last edited 2 days ago by M...</p>
@@ -622,199 +673,230 @@
       <!-- This div is for the project 5DPC, accessible when you
       select 303 Team > 5DPC -->
       <div id="Project2" class="w3-container file w3-animate-opacity">
-          <br />
-          <h5>Folders</h5>
-          <div>
-            <a class="w3-button w3-light-grey" href="#">
-              <i class="w3-margin-right fa fa-folder"></i>Resources
-            </a>
-            <a class="w3-button w3-light-grey" href="#">
-              <i class="w3-margin-right fa fa-folder"></i>Long List
-            </a>
-            <a class="w3-button w3-light-grey" href="#">
-              <i class="w3-margin-right fa fa-folder"></i>Report
-            </a>
-          </div>
-          <hr />
-          <h5>Recently Used Files</h5>
-          <div class="recently-used-items">
-            <div class="recently-used-item w3-card">
-              <div class="thumbnail-border">
-                <img
-                  class="thumbnail w3-round"
-                  src="./excel-image.PNG"
-                />
-              </div>
-              <h5 class="w3-opacity w3-center">Finances.xlsx</h5>
-              <p class="w3-small w3-center">Last viewed today</p>
+        <br />
+        <h5>Folders</h5>
+        <div>
+          <a class="w3-button w3-light-grey" href="#">
+            <i class="w3-margin-right fa fa-folder"></i>Resources
+          </a>
+          <a class="w3-button w3-light-grey" href="#">
+            <i class="w3-margin-right fa fa-folder"></i>Long List
+          </a>
+          <a class="w3-button w3-light-grey" href="#">
+            <i class="w3-margin-right fa fa-folder"></i>Report
+          </a>
+        </div>
+        <hr />
+        <h5>Recently Used Files</h5>
+        <div class="recently-used-items">
+          <div class="recently-used-item w3-card">
+            <div class="thumbnail-border">
+              <img class="thumbnail w3-round" src="./excel-image.PNG" />
             </div>
-            <div class="recently-used-item w3-card">
-              <div class="thumbnail-border">
-                <img
-                  class="thumbnail w3-round"
-                  src="./pdf-image3.PNG"
-                />
-              </div>
-              <h5 class="w3-opacity w3-center">5DPC Brief.pdf</h5>
-              <p class="label w3-small w3-center">
-                Last edited 1 day ago by M...
-              </p>
-            </div>
-            <div class="recently-used-item w3-card">
-              <div class="thumbnail-border">
-                <img
-                  class=" thumbnail w3-round"
-                  src="./pdf-image4.PNG"
-                />
-              </div>
-              <h5 class="w3-opacity w3-center">5DPC Assessment O...</h5>
-              <p class="w3-small w3-center">Last edited 2 days ago by M...</p>
-            </div>
+            <h5 class="w3-opacity w3-center">Finances.xlsx</h5>
+            <p class="w3-small w3-center">Last viewed today</p>
           </div>
-          <h5>Files</h5>
-          <div>
-            <a class="w3-button w3-light-grey" href="#">
-              <i class="w3-margin-right fa fa-file-pdf"></i>5DPC Assessment Outline.pdf
-            </a>
-            <a class="w3-button w3-light-grey" href="#">
-              <i class="w3-margin-right fa fa-file-pdf"></i>5DPC Brief.pd
-            </a>
-            <a class="w3-button w3-light-grey" href="#">
-              <i class="w3-margin-right fa fa-file-excel"></i>Finances.xlsx
-            </a>
+          <div class="recently-used-item w3-card">
+            <div class="thumbnail-border">
+              <img class="thumbnail w3-round" src="./pdf-image3.PNG" />
+            </div>
+            <h5 class="w3-opacity w3-center">5DPC Brief.pdf</h5>
+            <p class="label w3-small w3-center">
+              Last edited 1 day ago by M...
+            </p>
           </div>
+          <div class="recently-used-item w3-card">
+            <div class="thumbnail-border">
+              <img class=" thumbnail w3-round" src="./pdf-image4.PNG" />
+            </div>
+            <h5 class="w3-opacity w3-center">5DPC Assessment O...</h5>
+            <p class="w3-small w3-center">Last edited 2 days ago by M...</p>
+          </div>
+        </div>
+        <h5>Files</h5>
+        <div>
+          <a class="w3-button w3-light-grey" href="#">
+            <i class="w3-margin-right fa fa-file-pdf"></i>5DPC Assessment
+            Outline.pdf
+          </a>
+          <a class="w3-button w3-light-grey" href="#">
+            <i class="w3-margin-right fa fa-file-pdf"></i>5DPC Brief.pd
+          </a>
+          <a class="w3-button w3-light-grey" href="#">
+            <i class="w3-margin-right fa fa-file-excel"></i>Finances.xlsx
+          </a>
+        </div>
       </div>
 
       <!-- This div is for the project Assignment 2, accessible when you
       select 350 > Assigment 2 -->
       <div id="Project3" class="w3-container file w3-animate-opacity">
-          <br />
-          <h5>Folders</h5>
-          <div>
-            <a class="w3-button w3-light-grey" href="#">
-              <i class="w3-margin-right fa fa-folder"></i>Resources
-            </a>
-            <a class="w3-button w3-light-grey" href="#">
-              <i class="w3-margin-right fa fa-folder"></i>Report
-            </a>
-            <a class="w3-button w3-light-grey" href="#">
-              <i class="w3-margin-right fa fa-folder"></i>Prototypes
-            </a>
-          </div>
-          <hr />
-          <h5>Recently Used Files</h5>
-          <div class="recently-used-items">
-            <div class="recently-used-item w3-card">
-              <div class="thumbnail-border">
-                <img
-                  class="thumbnail w3-round"
-                  src="./pdf-image2.PNG"
-                />
-              </div>
-              <h5 class="w3-opacity w3-center">Assignment Brief.pdf</h5>
-              <p class="w3-small w3-center">Last viewed today</p>
+        <br />
+        <h5>Folders</h5>
+        <div>
+          <a class="w3-button w3-light-grey" href="#">
+            <i class="w3-margin-right fa fa-folder"></i>Resources
+          </a>
+          <a class="w3-button w3-light-grey" href="#">
+            <i class="w3-margin-right fa fa-folder"></i>Report
+          </a>
+          <a class="w3-button w3-light-grey" href="#">
+            <i class="w3-margin-right fa fa-folder"></i>Prototypes
+          </a>
+        </div>
+        <hr />
+        <h5>Recently Used Files</h5>
+        <div class="recently-used-items">
+          <div class="recently-used-item w3-card">
+            <div class="thumbnail-border">
+              <img class="thumbnail w3-round" src="./pdf-image2.PNG" />
             </div>
-            <div class="recently-used-item w3-card">
-              <div class="thumbnail-border">
-                <img
-                  class="thumbnail w3-round"
-                  src="./pdf-image2.PNG"
-                />
-              </div>
-              <h5 class="w3-opacity w3-center">Brainstorm.pdf</h5>
-              <p class="label w3-small w3-center">
-                Last edited 1 day ago by M...
-              </p>
-            </div>
-            <div class="recently-used-item w3-card">
-              <div class="thumbnail-border">
-                <img
-                  class=" thumbnail w3-round"
-                  src="./pdf-image2.PNG"
-                />
-              </div>
-              <h5 class="w3-opacity w3-center">Sketch.pdf</h5>
-              <p class="w3-small w3-center">Last edited 2 days ago by M...</p>
-            </div>
+            <h5 class="w3-opacity w3-center">Assignment Brief.pdf</h5>
+            <p class="w3-small w3-center">Last viewed today</p>
           </div>
-          <h5>Files</h5>
-          <div>
-            <a class="w3-button w3-light-grey" href="#">
-              <i class="w3-margin-right fa fa-file-pdf"></i>Assignment Brief.pdf
-            </a>
-            <a class="w3-button w3-light-grey" href="#">
-              <i class="w3-margin-right fa fa-file-pdf"></i>Brainstorm.pdf
-            </a>
-            <a class="w3-button w3-light-grey" href="#">
-              <i class="w3-margin-right fa fa-file-pdf"></i>Sketch.pdf
-            </a>
+          <div class="recently-used-item w3-card">
+            <div class="thumbnail-border">
+              <img class="thumbnail w3-round" src="./pdf-image2.PNG" />
+            </div>
+            <h5 class="w3-opacity w3-center">Brainstorm.pdf</h5>
+            <p class="label w3-small w3-center">
+              Last edited 1 day ago by M...
+            </p>
           </div>
+          <div class="recently-used-item w3-card">
+            <div class="thumbnail-border">
+              <img class=" thumbnail w3-round" src="./pdf-image2.PNG" />
+            </div>
+            <h5 class="w3-opacity w3-center">Sketch.pdf</h5>
+            <p class="w3-small w3-center">Last edited 2 days ago by M...</p>
+          </div>
+        </div>
+        <h5>Files</h5>
+        <div>
+          <a class="w3-button w3-light-grey" href="#">
+            <i class="w3-margin-right fa fa-file-pdf"></i>Assignment Brief.pdf
+          </a>
+          <a class="w3-button w3-light-grey" href="#">
+            <i class="w3-margin-right fa fa-file-pdf"></i>Brainstorm.pdf
+          </a>
+          <a class="w3-button w3-light-grey" href="#">
+            <i class="w3-margin-right fa fa-file-pdf"></i>Sketch.pdf
+          </a>
+        </div>
       </div>
 
       <!-- This div is for the project Assignment 3, accessible when you
-      select 350 > Assigment 3 -->
+      select 350 > Assignment 3 -->
       <div id="Project4" class="w3-container file w3-animate-opacity">
-          <br />
-          <h5>Folders</h5>
-          <div>
-            <a class="w3-button w3-light-grey" href="#">
-              <i class="w3-margin-right fa fa-folder"></i>Resources
-            </a>
-            <a class="w3-button w3-light-grey" href="#">
-              <i class="w3-margin-right fa fa-folder"></i>Report
-            </a>
-            <a class="w3-button w3-light-grey" href="#">
-              <i class="w3-margin-right fa fa-folder"></i>Prototypes
-            </a>
-          </div>
-          <hr />
-          <h5>Recently Used Files</h5>
-          <div class="recently-used-items">
-            <div class="recently-used-item w3-card">
-              <div class="thumbnail-border">
-                <img
-                  class="thumbnail w3-round"
-                  src="./pdf-image1.PNG"
-                />
-              </div>
-              <h5 class="w3-opacity w3-center">Assignment Brief.pdf</h5>
-              <p class="w3-small w3-center">Last viewed today</p>
+        <br />
+        <h5>Folders</h5>
+        <div>
+          <a class="w3-button w3-light-grey" href="#">
+            <i class="w3-margin-right fa fa-folder"></i>Resources
+          </a>
+          <a class="w3-button w3-light-grey" href="#">
+            <i class="w3-margin-right fa fa-folder"></i>Report
+          </a>
+          <a class="w3-button w3-light-grey" href="#">
+            <i class="w3-margin-right fa fa-folder"></i>Prototypes
+          </a>
+        </div>
+        <hr />
+        <h5>Recently Used Files</h5>
+        <div class="recently-used-items">
+          <div class="recently-used-item w3-card">
+            <div class="thumbnail-border">
+              <img class="thumbnail w3-round" src="./pdf-image1.PNG" />
             </div>
-            <div class="recently-used-item w3-card">
-              <div class="thumbnail-border">
-                <img
-                  class="thumbnail w3-round"
-                  src="./pdf-image1.PNG"
-                />
-              </div>
-              <h5 class="w3-opacity w3-center">Usage data.pdf</h5>
-              <p class="label w3-small w3-center">
-                Last edited 1 day ago by M...
-              </p>
-            </div>
-            <div class="recently-used-item w3-card">
-              <div class="thumbnail-border">
-                <img
-                  class=" thumbnail w3-round"
-                  src="./pdf-image1.PNG"
-                />
-              </div>
-              <h5 class="w3-opacity w3-center">Sketch.pdf</h5>
-              <p class="w3-small w3-center">Last edited 2 days ago by M...</p>
-            </div>
+            <h5 class="w3-opacity w3-center">Assignment Brief.pdf</h5>
+            <p class="w3-small w3-center">Last viewed today</p>
           </div>
-          <h5>Files</h5>
-          <div>
-            <a class="w3-button w3-light-grey" href="#">
-              <i class="w3-margin-right fa fa-file-pdf"></i>Assignment Brief.pdf
-            </a>
-            <a class="w3-button w3-light-grey" href="#">
-              <i class="w3-margin-right fa fa-file-pdf"></i>Usage data.pdf
-            </a>
-            <a class="w3-button w3-light-grey" href="#">
-              <i class="w3-margin-right fa fa-file-pdf"></i>Sketch.pdf
-            </a>
+          <div class="recently-used-item w3-card">
+            <div class="thumbnail-border">
+              <img class="thumbnail w3-round" src="./pdf-image1.PNG" />
+            </div>
+            <h5 class="w3-opacity w3-center">Usage data.pdf</h5>
+            <p class="label w3-small w3-center">
+              Last edited 1 day ago by M...
+            </p>
           </div>
+          <div class="recently-used-item w3-card">
+            <div class="thumbnail-border">
+              <img class=" thumbnail w3-round" src="./pdf-image1.PNG" />
+            </div>
+            <h5 class="w3-opacity w3-center">Sketch.pdf</h5>
+            <p class="w3-small w3-center">Last edited 2 days ago by M...</p>
+          </div>
+        </div>
+        <h5>Files</h5>
+        <div>
+          <a class="w3-button w3-light-grey" href="#">
+            <i class="w3-margin-right fa fa-file-pdf"></i>Assignment Brief.pdf
+          </a>
+          <a class="w3-button w3-light-grey" href="#">
+            <i class="w3-margin-right fa fa-file-pdf"></i>Usage data.pdf
+          </a>
+          <a class="w3-button w3-light-grey" href="#">
+            <i class="w3-margin-right fa fa-file-pdf"></i>Sketch.pdf
+          </a>
+        </div>
+      </div>
+
+      <!-- This div is for the project Assignment, accessible when you
+      select Anthony > Assignment -->
+      <div id="Project5" class="w3-container file w3-animate-opacity">
+        <br />
+        <h5>Folders</h5>
+        <div>
+          <a class="w3-button w3-light-grey" href="#">
+            <i class="w3-margin-right fa fa-folder"></i>Resources
+          </a>
+          <a class="w3-button w3-light-grey" href="#">
+            <i class="w3-margin-right fa fa-folder"></i>Report
+          </a>
+          <a class="w3-button w3-light-grey" href="#">
+            <i class="w3-margin-right fa fa-folder"></i>Prototypes
+          </a>
+        </div>
+        <hr />
+        <h5>Recently Used Files</h5>
+        <div class="recently-used-items">
+          <div class="recently-used-item w3-card">
+            <div class="thumbnail-border">
+              <img class="thumbnail w3-round" src="./pdf-image1.PNG" />
+            </div>
+            <h5 class="w3-opacity w3-center">Assignment Brief.pdf</h5>
+            <p class="w3-small w3-center">Last viewed today</p>
+          </div>
+          <div class="recently-used-item w3-card">
+            <div class="thumbnail-border">
+              <img class="thumbnail w3-round" src="./pdf-image1.PNG" />
+            </div>
+            <h5 class="w3-opacity w3-center">Usage data.pdf</h5>
+            <p class="label w3-small w3-center">
+              Last edited 1 day ago by...
+            </p>
+          </div>
+          <div class="recently-used-item w3-card">
+            <div class="thumbnail-border">
+              <img class=" thumbnail w3-round" src="./pdf-image1.PNG" />
+            </div>
+            <h5 class="w3-opacity w3-center">Sketch.pdf</h5>
+            <p class="w3-small w3-center">Last edited 2 days ago by...</p>
+          </div>
+        </div>
+        <h5>Files</h5>
+        <div>
+          <a class="w3-button w3-light-grey" href="#">
+            <i class="w3-margin-right fa fa-file-pdf"></i>Assignment Brief.pdf
+          </a>
+          <a class="w3-button w3-light-grey" href="#">
+            <i class="w3-margin-right fa fa-file-pdf"></i>Usage data.pdf
+          </a>
+          <a class="w3-button w3-light-grey" href="#">
+            <i class="w3-margin-right fa fa-file-pdf"></i>Sketch.pdf
+          </a>
+        </div>
       </div>
     </div>
 
@@ -834,6 +916,21 @@
         document.getElementById("myOverlay").style.display = "none";
       }
 
+      /* Make popup appear for any features that are not implemented 
+      (those that do not relate to our user needs)*/
+
+      function openUnimplementedPopup() {
+        document.getElementById("popup").style.display = "block";
+        document.getElementById("myOverlay").style.display = "block";
+      }
+
+      /* Hide popup*/
+
+      function closeUnimplementedPopup() {
+        document.getElementById("popup").style.display = "none";
+        document.getElementById("myOverlay").style.display = "none";
+      }
+
       function myFunc(id) {
         var x = document.getElementById(id);
         if (x.className.indexOf("w3-show") == -1) {
@@ -848,10 +945,11 @@
         }
       }
 
-      doShare("Project1");
+      doShare("Project1", "303 Team", "TGIP");
+      closeUnimplementedPopup();
 
       // Changes the main page content depending on the chosen project
-      function doShare(fileName, team, project) {
+      function doShare(fileName, team, project, element) {
         var i;
         var x = document.getElementsByClassName("file");
         for (i = 0; i < x.length; i++) {
@@ -862,7 +960,10 @@
           x[i].className = x[i].className.replace(" w3-light-blue", "");
         }
         document.getElementById(fileName).style.display = "block";
-        event.currentTarget.className += " w3-light-blue";
+
+        if (event) {
+          event.currentTarget.className += " w3-light-blue";
+        }
 
         document.getElementById("breadcrumbs-team").innerHTML = team;
         document.getElementById("breadcrumbs-project").innerHTML = project;
@@ -938,17 +1039,28 @@
         //If Both fields filled, display confirmation pop-up
         if (filePresent == 1 && toPresent == 1) {
           document.getElementById("confirmation").style.display = "block";
+          //hide any warnings
+        document.getElementById("share-warning").style.display = "none";
         } else {
           //if not, display warning
           document.getElementById("share-warning").style.display =
             "inline-block";
         }
       }
+
+      //function for closing successful sharing pop-up
+      function closeSuccess(){
+        //close modal
+        document.getElementById('success').style.display='none';
+        
+        //clear share menu
+        closeShare();
+      }
     </script>
 
-    <script>
-      var openTab = document.getElementById("firstTab");
-      openTab.click();
-    </script>
+<script>
+  var openTab = document.getElementById("firstTab");
+  openTab.click();
+</script>
   </body>
 </html>

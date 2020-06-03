@@ -21,9 +21,8 @@
   width: 50%;
   margin-left: 15px;
   background-color: #e7e7e7;
-  border-radius: 3px;
-  border: none;
   outline: none;
+  border-radius: 3px;
 }
 
 .settings {
@@ -122,7 +121,13 @@
 }
 
 /**Share Menu**/
+.close-button {
+  padding: 8px 16px;
+}
 
+.close-button i:hover {
+  color: gray;
+}
 /* To search*/
 .ui-autocomplete-category {
   font-weight: bold;
@@ -131,13 +136,17 @@
   line-height: 1.5;
 }
 
+li.ui-menu-item {
+  padding: 0 1em;
+}
+
 /* File upload */
 .uploaded-file {
   display: none;
   border: 1 solid blue;
   height: 160px;
   width: 7.5em;
-  margin: 25px 10px;
+  margin: 20px 10px;
   text-align: center;
   position: relative;
 }
@@ -155,14 +164,18 @@
 }
 
 .uploaded-file i:hover {
-  color: red;
+  color: #e7e7e7;
 }
 
 .custom-file-upload {
-  border: 1px solid #ccc;
   display: inline-block;
-  padding: 6px 12px;
+  padding: 2px 5px;
   cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.custom-file-upload:hover {
+  background-color: #ccc !important;
 }
 
 input[type="file"] {
@@ -260,11 +273,14 @@ input[type="file"] {
   background-color: #e7e7e7;
 }
 
+.recently-used-item:hover {
+  transform: scale(1.05);
+}
+
 .thumbnail-border {
   display: flex;
   justify-content: center;
   background-color: #e7e7e7;
-  border-radius: 5px;
 }
 
 .thumbnail {
