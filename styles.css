@@ -33,6 +33,9 @@
   margin: auto 0 auto 15px;
   font-weight: bold;
   font-size: 1.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .icon {
@@ -86,6 +89,7 @@
 
 .tooltip .tooltiptext {
   /* visibility: hidden; */
+  pointer-events: none;
   font-size: 12px;
   background-color: #555;
   color: #fff;
@@ -96,7 +100,8 @@
   /* Position the tooltip text */
   position: absolute;
   z-index: 1;
-  bottom: -10%;
+  /* bottom: -10%; */
+  margin-top: 2em;
   left: 25%;
   margin-left: -30px;
 
