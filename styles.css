@@ -23,6 +23,7 @@
   background-color: #e7e7e7;
   border-radius: 3px;
   border: none;
+  outline: none;
 }
 
 .settings {
@@ -114,6 +115,10 @@
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+}
+
+.tooltiptext-user-settings {
+  width: 100px;
 }
 
 /**Share Menu**/
