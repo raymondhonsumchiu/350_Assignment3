@@ -153,7 +153,7 @@
         <input class="search-field" type="text" />
       </div>
       <div class="settings tooltip">
-        <i class="fas fa-cog fa-lg icon"></i>
+        <i class="fas fa-cog fa-2x icon"></i>
         <span class="tooltiptext">Settings</span>
       </div>
     </div>
@@ -189,21 +189,21 @@
         <a
           href="javascript:void(0)"
           class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
-          onclick="doShare('Project1');w3_close();"
+          onclick="doShare('Project1', '303 Team', 'TGIP');w3_close();"
           id="firstTab"
         >
           <div class="w3-container">
-            <i class="fas fa-box-open fa-lg project"></i>
+            <i class="fas fa-box-open project"></i>
             <span class="w3-opacity w3-small">TGIP</span>
           </div>
         </a>
         <a
           href="javascript:void(0)"
           class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
-          onclick="doShare('Project2');w3_close();"
+          onclick="doShare('Project2', '303 Team', '5DPC');w3_close();"
         >
           <div class="w3-container">
-            <i class="fas fa-box-open fa-lg project"></i>
+            <i class="fas fa-box-open project"></i>
             <span class="w3-opacity w3-small">5DPC</span>
           </div>
         </a>
@@ -218,34 +218,33 @@
           </div>
         </a>
       </div>
-
       <a
         id="myBtn2"
         onclick="myFunc('Demo2')"
         href="javascript:void(0)"
         class="w3-bar-item w3-button"
-        ><i class="fa fa-users w3-margin-right w3-large"></i>350 bros (2)
+        ><i class="fa fa-users w3-margin-right w3-large"></i>350 (2)
         <i class="fa fa-caret-down w3-margin-left"></i
       ></a>
       <div id="Demo2" class="w3-hide w3-animate-left">
         <a
           href="javascript:void(0)"
           class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
-          onclick="doShare('Project3');w3_close();"
+          onclick="doShare('Project3', '350', 'Assignment 2');w3_close();"
           id="firstTab"
         >
           <div class="w3-container">
-            <i class="fas fa-box-open fa-lg project"></i>
+            <i class="fas fa-box-open project"></i>
             <span class="w3-opacity w3-small">Assignment 2</span>
           </div>
         </a>
         <a
           href="javascript:void(0)"
           class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
-          onclick="doShare('Project4');w3_close();"
+          onclick="doShare('Project4', '350', 'Assignment 3');w3_close();"
         >
           <div class="w3-container">
-            <i class="fas fa-box-open fa-lg project"></i>
+            <i class="fas fa-box-open project"></i>
             <span class="w3-opacity w3-small">Assignment 3</span>
           </div>
         </a>
@@ -266,10 +265,9 @@
         onclick="myFunc('Demo3')"
         href="javascript:void(0)"
         class="w3-bar-item w3-button"
-        ><i class="fa fa-users w3-margin-right"></i>351 suffering<i
-          class="fa fa-caret-down w3-margin-left"
-        ></i
-      ></a>
+        ><i class="fa fa-users w3-margin-right w3-large"></i>351
+        <i class="fa fa-caret-down w3-margin-left"></i>
+      </a>
       <div id="Demo3" class="w3-hide w3-animate-left">
         <a
           href="javascript:void(0)"
@@ -282,6 +280,13 @@
           </div>
         </a>
       </div>
+      <a
+        id="myBtn"
+        onclick=""
+        href="javascript:void(0)"
+        class="w3-bar-item w3-button"
+        ><i class="fa fa-plus w3-margin-right w3-large"></i>Add team...
+      </a>
 
       <!-- INDIVIDUAL USERS SIDEBAR-->
 
@@ -332,6 +337,13 @@
           </div>
         </a>
       </div>
+      <a
+        id="myBtn"
+        onclick=""
+        href="javascript:void(0)"
+        class="w3-bar-item w3-button"
+        ><i class="fa fa-plus w3-margin-right w3-large"></i>Add person...
+      </a>
 
       <!-- Trash button on the sidebar -->
       <a href="#" class="w3-bar-item w3-button"
@@ -358,17 +370,17 @@
     <!-- Breadcrumbs bar showing where you are in the project -->
     <div class="breadcrumbs-bar">
       <i
-        class="fa fa-bars w3-button w3-white w3-hide-large w3-xlarge w3-margin-left w3-margin-top"
+        class="fa fa-bars w3-button w3-white w3-hide-large w3-xlarge"
         onclick="w3_open()"
       ></i>
       <div class="breadcrumbs">
-        <a class="breadcrumbs-link" href="#">303 Team</a>
+        <a id="breadcrumbs-team" class="breadcrumbs-link" href="#">303 Team</a>
         >
-        <a class="breadcrumbs-link" href="#">TGIP</a>
+        <a id="breadcrumbs-project" class="breadcrumbs-link" href="#">TGIP</a>
       </div>
       <div class="breadcrumbs-bar-icons">
         <div class="tooltip">
-          <i class="far fa-clipboard fa-lg icon"></i>
+          <i class="far fa-clipboard fa-2x icon"></i>
           <span class="tooltiptext">Changelog</span>
         </div>
       </div>
@@ -807,7 +819,9 @@
       }
 
       doShare("Project1");
-      function doShare(fileName) {
+
+      // Changes the main page content depending on the chosen project
+      function doShare(fileName, team, project) {
         var i;
         var x = document.getElementsByClassName("file");
         for (i = 0; i < x.length; i++) {
@@ -815,10 +829,13 @@
         }
         x = document.getElementsByClassName("test");
         for (i = 0; i < x.length; i++) {
-          x[i].className = x[i].className.replace(" w3-light-grey", "");
+          x[i].className = x[i].className.replace(" w3-light-blue", "");
         }
         document.getElementById(fileName).style.display = "block";
-        event.currentTarget.className += " w3-light-grey";
+        event.currentTarget.className += " w3-light-blue";
+
+        document.getElementById("breadcrumbs-team").innerHTML = team;
+        document.getElementById("breadcrumbs-project").innerHTML = project;
       }
     </script>
 
