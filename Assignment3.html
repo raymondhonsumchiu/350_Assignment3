@@ -158,16 +158,19 @@
       </div>
     </div>
 
-    <!-- Side Navigation -->
+    <!-- Sidebar Navigation -->
     <nav
       class="w3-sidebar w3-bar-block w3-collapse w3-white w3-animate-left w3-card"
       style="z-index:3;width:320px;height:80%;"
       id="mySidebar"
     >
+
+    <!-- Large Teams label -->
       <div class="w3-bar-item w3-border-bottom w3-large sidebar-team">
         <i class="fas fa-users fa-3x"></i>
         <label class="sidebar-team-label">Teams</label>
       </div>
+
       <!-- Close button on the sidebar -->
       <a
         href="javascript:void(0)"
@@ -176,6 +179,8 @@
         class="w3-bar-item w3-button w3-hide-large w3-large"
         >Close <i class="fa fa-remove"></i
       ></a>
+
+      <!-- The different teams - i.e. this is the 303 team -->
       <a
         id="myBtn"
         onclick="myFunc('Demo1')"
@@ -192,6 +197,8 @@
           onclick="doShare('Project1', '303 Team', 'TGIP');w3_close();"
           id="firstTab"
         >
+
+        <!-- 303 Team's two projects - TGIP and 5DPC -->
           <div class="w3-container">
             <i class="fas fa-box-open project"></i>
             <span class="w3-opacity w3-small">TGIP</span>
@@ -212,12 +219,16 @@
           class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
           onclick=""
         >
+
+        <!-- Sidebar item to add a new project to 303 team (functionality not implenented) -->
           <div class="w3-container">
             <i class="fas fa-plus project"></i>
             <span class="w3-opacity w3-small">Add project...</span>
           </div>
         </a>
       </div>
+
+      <!-- 350 Team -->
       <a
         id="myBtn2"
         onclick="myFunc('Demo2')"
@@ -260,6 +271,7 @@
         </a>
       </div>
 
+      <!-- 351 Team -->
       <a
         id="myBtn3"
         onclick="myFunc('Demo3')"
@@ -288,7 +300,8 @@
         ><i class="fa fa-plus w3-margin-right w3-large"></i>Add team...
       </a>
 
-      <!-- INDIVIDUAL USERS SIDEBAR-->
+      <!-- INDIVIDUAL USERS SIDEBAR e.g. Martin, Anthony. 
+        This is where the user Raymond Chiu can share with one other person -->
 
       <div class="w3-bar-item w3-border-top w3-border-bottom w3-large sidebar-team">
           <i class="fas fa-user fa-3x"></i>
@@ -337,6 +350,8 @@
           </div>
         </a>
       </div>
+
+      <!-- Can add new people to the list (functionality not implemented) -->
       <a
         id="myBtn"
         onclick=""
@@ -351,6 +366,8 @@
       >
     </nav>
 
+    <!-- The user profile on the bottom left of the sidebar,
+    user can edit their information and other settings (functionality not implemented) -->
     <div
       id="user-profile"
       class="w3-sidebar w3-collapse w3-white w3-animate-left w3-card"
@@ -371,7 +388,7 @@
       </div>
     </div>
 
-    <!-- Breadcrumbs bar showing where you are in the project -->
+    <!-- Breadcrumbs bar showing which project and team you have selected -->
     <div class="breadcrumbs-bar">
       <i
         class="fa fa-bars w3-button w3-white w3-hide-large w3-xlarge"
@@ -535,6 +552,9 @@
 
     <!-- Page content -->
     <div class="w3-main" style="margin-left:320px;">
+
+      <!-- This div is for the project TGIP, accessible when you
+      select 303 Team > TGIP -->
       <div id="Project1" class="w3-container file w3-animate-opacity">
         <br />
         <h5>Folders</h5>
@@ -599,6 +619,8 @@
         </div>
       </div>
 
+      <!-- This div is for the project 5DPC, accessible when you
+      select 303 Team > 5DPC -->
       <div id="Project2" class="w3-container file w3-animate-opacity">
           <br />
           <h5>Folders</h5>
@@ -663,6 +685,8 @@
           </div>
       </div>
 
+      <!-- This div is for the project Assignment 2, accessible when you
+      select 350 > Assigment 2 -->
       <div id="Project3" class="w3-container file w3-animate-opacity">
           <br />
           <h5>Folders</h5>
@@ -727,6 +751,8 @@
           </div>
       </div>
 
+      <!-- This div is for the project Assignment 3, accessible when you
+      select 350 > Assigment 3 -->
       <div id="Project4" class="w3-container file w3-animate-opacity">
           <br />
           <h5>Folders</h5>
