@@ -293,3 +293,5 @@ input[type="file"] {
 .label {
   width: 100%;
 }
+
+.ui-helper-hidden-accessible { position: absolute; left:-999em; }
