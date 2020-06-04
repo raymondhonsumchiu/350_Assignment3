@@ -430,20 +430,21 @@
       <div class="w3-modal-content w3-animate-zoom">
         <div class="w3-container w3-padding w3-light-blue">
           <span
-            onclick="document.getElementById('addTeamPopup').style.display='none'"
+            onclick="cancelAddPopup('team')"
             class="close-button w3-right w3-xxlarge"
             ><i class="fa fa-remove"></i
           ></span>
           <h2>Add Team</h2>
         </div>
         <div class="w3-panel">
-          <label>Name</label>
-          <input class="w3-input w3-border w3-margin-bottom" type="text">
-          <label>Emails (Separate by comma)</label>
-          <input class="w3-input w3-border w3-margin-bottom" type="text">
-          <div class="w3-section">
-            <a class="w3-button w3-light-grey" onclick="document.getElementById('addTeamPopup').style.display='none'">Cancel  <i class="fa fa-remove"></i></a>
-            <a class="w3-button w3-light-blue w3-right" onclick="document.getElementById('addTeamPopup').style.display='none'">Add Team  <i class="fa fa-plus"></i></a> 
+          <label>Name:</label>
+          <input id="team-name" class="w3-input w3-border w3-margin-bottom" type="text">
+          <label>Emails (Separate by comma):</label>
+          <input id="team-emails" class="w3-input w3-border w3-margin-bottom" type="text">
+          <div class="w3-section add-button-container">
+            <a class="w3-button w3-light-grey" onclick="cancelAddPopup('team')">Cancel  <i class="fa fa-remove"></i></a>
+            <label id="team-warning" style="color: red; display: none; margin: auto;">Please fill out the fields!</label>
+            <a class="w3-button w3-light-blue w3-right" onclick="closeAddPopup('team')">Add Team  <i class="fa fa-plus"></i></a> 
           </div>    
         </div>
       </div>
@@ -454,20 +455,21 @@
       <div class="w3-modal-content w3-animate-zoom">
         <div class="w3-container w3-padding w3-light-blue">
           <span
-            onclick="document.getElementById('addPeoplePopup').style.display='none'"
+            onclick="cancelAddPopup('person')"
             class="close-button w3-right w3-xxlarge"
             ><i class="fa fa-remove"></i
           ></span>
           <h2>Add Person</h2>
         </div>
         <div class="w3-panel">
-          <label>Name</label>
-          <input class="w3-input w3-border w3-margin-bottom" type="text">
-          <label>Email</label>
-          <input class="w3-input w3-border w3-margin-bottom" type="text">
-          <div class="w3-section">
-            <a class="w3-button w3-light-grey" onclick="document.getElementById('addPeoplePopup').style.display='none'">Cancel  <i class="fa fa-remove"></i></a>
-            <a class="w3-button w3-light-blue w3-right" onclick="document.getElementById('addPeoplePopup').style.display='none'">Add Person  <i class="fa fa-plus"></i></a> 
+          <label>Name:</label>
+          <input id="person-name" class="w3-input w3-border w3-margin-bottom" type="text">
+          <label>Email:</label>
+          <input id="person-email" class="w3-input w3-border w3-margin-bottom" type="text">
+          <div class="w3-section add-button-container">
+            <a class="w3-button w3-light-grey" onclick="cancelAddPopup('person')">Cancel  <i class="fa fa-remove"></i></a>
+            <label id="person-warning" style="color: red; display: none; margin: auto;">Please fill out the fields!</label>
+            <a class="w3-button w3-light-blue w3-right" onclick="closeAddPopup('person')">Add Person  <i class="fa fa-plus"></i></a> 
           </div>    
         </div>
       </div>
@@ -478,18 +480,19 @@
       <div class="w3-modal-content w3-animate-zoom">
         <div class="w3-container w3-padding w3-light-blue">
           <span
-            onclick="document.getElementById('addProjectPopup').style.display='none'"
+            onclick="cancelAddPopup('project')"
             class="close-button w3-right w3-xxlarge"
             ><i class="fa fa-remove"></i
           ></span>
-          <h2>Add Project</h2>
+          <h2>Add Project:</h2>
         </div>
         <div class="w3-panel">
-          <label>Name</label>
-          <input class="w3-input w3-border w3-margin-bottom" type="text">
-          <div class="w3-section">
-            <a class="w3-button w3-light-grey" onclick="document.getElementById('addProjectPopup').style.display='none'">Cancel  <i class="fa fa-remove"></i></a>
-            <a class="w3-button w3-light-blue w3-right" onclick="document.getElementById('addProjectPopup').style.display='none'">Add Project  <i class="fa fa-plus"></i></a> 
+          <label>Name:</label>
+          <input id="project-name" class="w3-input w3-border w3-margin-bottom" type="text">
+          <div class="w3-section add-button-container">
+            <a class="w3-button w3-light-grey" onclick="cancelAddPopup('project')">Cancel  <i class="fa fa-remove"></i></a>
+            <label id="project-warning" style="color: red; display: none; margin: auto;">Please fill out the fields!</label>
+            <a class="w3-button w3-light-blue w3-right" onclick="closeAddPopup('project')">Add Project  <i class="fa fa-plus"></i></a> 
           </div>    
         </div>
       </div>
@@ -1257,6 +1260,77 @@
           //if not, display warning
           document.getElementById("share-warning").style.display =
             "inline-block";
+        }
+      }
+
+      /* Closes the window add team/person/project popup, clear warnings and textfields 
+      @type - either "project", "team" or "people" */
+      function cancelAddPopup(type) {
+        if (type === "project") {
+          document.getElementById('addProjectPopup').style.display='none'; 
+          document.getElementById('project-warning').style.display='none';
+          document.getElementById("project-name").value = "";
+        } else if (type === "team") {
+          document.getElementById('addTeamPopup').style.display='none'; 
+          document.getElementById('team-warning').style.display='none';
+          document.getElementById("team-name").value = "";
+          document.getElementById("team-emails").value = "";
+        } else {
+          document.getElementById('addPeoplePopup').style.display='none'; 
+          document.getElementById('person-warning').style.display='none';
+          document.getElementById("person-name").value = "";
+          document.getElementById("person-email").value = "";
+        }
+      }
+
+      /* closes Add Team/Project/Person when clicking the Add button.
+          Displays a warning if the field are not filled in
+          @type - either "project", "team" or "people" */
+      function closeAddPopup(type) {
+        if (type === "project") {
+          let name = document.getElementById("project-name");
+          //If Both fields filled, close window
+          if (name.value.trim() !== "") {
+            document.getElementById("addProjectPopup").style.display = "none";
+            //hide any warnings
+            document.getElementById("project-warning").style.display = "none";
+
+            // clear name
+            name.value = "";
+          } else {
+          //if not, display warning
+          document.getElementById("project-warning").style.display = "inline-block";
+          }
+        } else if (type === "team") {
+          let name = document.getElementById("team-name");
+          let emails = document.getElementById("team-emails");
+          if (name.value.trim() !== "" && emails.value.trim() !== "") {
+            document.getElementById("addTeamPopup").style.display = "none";
+            //hide any warnings
+            document.getElementById("team-warning").style.display = "none";
+
+            // clear name and emails
+            name.value = "";
+            emails.value = "";
+          } else {
+          //if not, display warning
+          document.getElementById("team-warning").style.display = "inline-block";
+          }
+        } else {
+          let name = document.getElementById("person-name");
+          let emails = document.getElementById("person-email");
+          if (name.value.trim() !== "" && emails.value.trim() !== "") {
+            document.getElementById("addPeoplePopup").style.display = "none";
+            //hide any warnings
+            document.getElementById("person-warning").style.display = "none";
+
+            // clear name and email
+            name.value = "";
+            emails.value = "";
+          } else {
+          //if not, display warning
+          document.getElementById("person-warning").style.display = "inline-block";
+          }
         }
       }
 
