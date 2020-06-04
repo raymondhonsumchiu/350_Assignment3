@@ -1,4 +1,4 @@
-<!DOCTYPE HTML5>
+﻿<!DOCTYPE HTML5>
 <html lang="en">
   <title>Assignment 3 adapted from W3.CSS Template</title>
   <!-- W3.CSS Template used from https://www.w3schools.com/images/w3schools.png -->
@@ -593,18 +593,16 @@
             style="height:50px;"
             placeholder="..."
           />
-          <div class="w3-section">
-            <a class="w3-button w3-light-grey" onclick="closeShare()"
-              >Cancel <i class="fa fa-remove"></i
-            ></a>
-            <div class="w3-right">
-              <label id="share-warning" style="color: red; display: none;"
-                >No receiver selected or No uploaded files</label
-              >
-              <a class="w3-button w3-light-blue" onclick="openConfirm()"
-                >Share <i class="fa fa-paper-plane"></i
-              ></a>
-            </div>
+          <div class="w3-section add-button-container">
+              <a class="w3-button w3-light-grey" onclick="closeShare()">
+                  Cancel <i class="fa fa-remove"></i>
+              </a>
+              <label id="share-warning" style="color: red; display: none;margin: auto">No receiver selected or No uploaded files</label>
+              <div class="w3-right">
+                  <a class="w3-button w3-light-blue" onclick="openConfirm()">
+                      Share <i class="fa fa-paper-plane"></i>
+                  </a>
+              </div>
           </div>
         </div>
       </div>
