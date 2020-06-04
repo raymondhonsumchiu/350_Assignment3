@@ -29,7 +29,7 @@
     h2,
     h3,
     h4,
-    h5 {
+    h5, h6 {
       font-family: "RobotoDraft", "Roboto", sans-serif;
     }
     .w3-bar-block .w3-bar-item {
@@ -39,7 +39,7 @@
   <!-- JQuery UI library-->
   <link
     rel="stylesheet"
-    href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
   />
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -169,7 +169,7 @@
     <!-- Top Navigation -->
     <div class="top-nav w3-light-blue">
       <div class="logo">
-        Assignment 3
+        Share.io
       </div>
       <div class="search">
         <div class="tooltip">
@@ -219,7 +219,7 @@
         <a
           href="javascript:void(0)"
           class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
-          onclick="doShare('Project1', '303 Team', 'TGIP',this);w3_close();"
+          onclick="doShare('Project1', '303 Team', 'TGIP');w3_close();"
           id="firstTab"
         >
           <!-- 303 Team's two projects - TGIP and 5DPC -->
@@ -231,7 +231,7 @@
         <a
           href="javascript:void(0)"
           class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
-          onclick="doShare('Project2', '303 Team', '5DPC',this);w3_close();"
+          onclick="doShare('Project2', '303 Team', '5DPC');w3_close();"
         >
           <div class="w3-container">
             <i class="fas fa-box-open project"></i>
@@ -244,7 +244,7 @@
           onclick=""
         >
           <!-- Sidebar item to add a new project to 303 team (functionality not implenented) -->
-          <div class="w3-container">
+          <div class="w3-container" onclick="document.getElementById('addProjectPopup').style.display='block'">
             <i class="fas fa-plus project"></i>
             <span class="w3-opacity w3-small">Add project...</span>
           </div>
@@ -287,7 +287,7 @@
           class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
           onclick=""
         >
-          <div class="w3-container">
+          <div class="w3-container" onclick="document.getElementById('addProjectPopup').style.display='block'">
             <i class="fas fa-plus project"></i>
             <span class="w3-opacity w3-small">Add project...</span>
           </div>
@@ -309,7 +309,7 @@
           class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
           onclick=""
         >
-          <div class="w3-container">
+          <div class="w3-container" onclick="document.getElementById('addProjectPopup').style.display='block'">
             <i class="fas fa-plus project"></i>
             <span class="w3-opacity w3-small">Add project...</span>
           </div>
@@ -317,7 +317,7 @@
       </div>
       <a
         id="myBtn"
-        onclick=""
+        onclick="document.getElementById('addTeamPopup').style.display = 'block'"
         href="javascript:void(0)"
         class="w3-bar-item w3-button"
         ><i class="fa fa-plus w3-margin-right w3-large"></i>Add team...
@@ -347,7 +347,7 @@
           class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
           onclick=""
         >
-          <div class="w3-container">
+          <div class="w3-container" onclick="document.getElementById('addProjectPopup').style.display='block'">
             <i class="fas fa-plus project"></i>
             <span class="w3-opacity w3-small">Add project...</span>
           </div>
@@ -379,7 +379,7 @@
           class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
           onclick=""
         >
-          <div class="w3-container">
+          <div class="w3-container" onclick="document.getElementById('addProjectPopup').style.display='block'">
             <i class="fas fa-plus project"></i>
             <span class="w3-opacity w3-small">Add project...</span>
           </div>
@@ -389,7 +389,7 @@
       <!-- Can add new people to the list (functionality not implemented) -->
       <a
         id="myBtn"
-        onclick=""
+        onclick="document.getElementById('addPeoplePopup').style.display = 'block'"
         href="javascript:void(0)"
         class="w3-bar-item w3-button"
         ><i class="fa fa-plus w3-margin-right w3-large"></i>Add person...
@@ -421,6 +421,76 @@
           <span class="tooltiptext tooltiptext-user-settings"
             >User Settings</span
           >
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup to add a team-->
+    <div id="addTeamPopup" class="w3-modal" style="z-index:4">
+      <div class="w3-modal-content w3-animate-zoom">
+        <div class="w3-container w3-padding w3-light-blue">
+          <span
+            onclick="document.getElementById('addTeamPopup').style.display='none'"
+            class="close-button w3-right w3-xxlarge"
+            ><i class="fa fa-remove"></i
+          ></span>
+          <h2>Add Team</h2>
+        </div>
+        <div class="w3-panel">
+          <label>Name</label>
+          <input class="w3-input w3-border w3-margin-bottom" type="text">
+          <label>Emails (Separate by comma)</label>
+          <input class="w3-input w3-border w3-margin-bottom" type="text">
+          <div class="w3-section">
+            <a class="w3-button w3-light-grey" onclick="document.getElementById('addTeamPopup').style.display='none'">Cancel  <i class="fa fa-remove"></i></a>
+            <a class="w3-button w3-light-blue w3-right" onclick="document.getElementById('addTeamPopup').style.display='none'">Add Team  <i class="fa fa-plus"></i></a> 
+          </div>    
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup to add a person-->
+    <div id="addPeoplePopup" class="w3-modal" style="z-index:4">
+      <div class="w3-modal-content w3-animate-zoom">
+        <div class="w3-container w3-padding w3-light-blue">
+          <span
+            onclick="document.getElementById('addPeoplePopup').style.display='none'"
+            class="close-button w3-right w3-xxlarge"
+            ><i class="fa fa-remove"></i
+          ></span>
+          <h2>Add Person</h2>
+        </div>
+        <div class="w3-panel">
+          <label>Name</label>
+          <input class="w3-input w3-border w3-margin-bottom" type="text">
+          <label>Email</label>
+          <input class="w3-input w3-border w3-margin-bottom" type="text">
+          <div class="w3-section">
+            <a class="w3-button w3-light-grey" onclick="document.getElementById('addPeoplePopup').style.display='none'">Cancel  <i class="fa fa-remove"></i></a>
+            <a class="w3-button w3-light-blue w3-right" onclick="document.getElementById('addPeoplePopup').style.display='none'">Add Person  <i class="fa fa-plus"></i></a> 
+          </div>    
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup to add a project-->
+    <div id="addProjectPopup" class="w3-modal" style="z-index:4">
+      <div class="w3-modal-content w3-animate-zoom">
+        <div class="w3-container w3-padding w3-light-blue">
+          <span
+            onclick="document.getElementById('addProjectPopup').style.display='none'"
+            class="close-button w3-right w3-xxlarge"
+            ><i class="fa fa-remove"></i
+          ></span>
+          <h2>Add Project</h2>
+        </div>
+        <div class="w3-panel">
+          <label>Name</label>
+          <input class="w3-input w3-border w3-margin-bottom" type="text">
+          <div class="w3-section">
+            <a class="w3-button w3-light-grey" onclick="document.getElementById('addProjectPopup').style.display='none'">Cancel  <i class="fa fa-remove"></i></a>
+            <a class="w3-button w3-light-blue w3-right" onclick="document.getElementById('addProjectPopup').style.display='none'">Add Project  <i class="fa fa-plus"></i></a> 
+          </div>    
         </div>
       </div>
     </div>
@@ -605,7 +675,7 @@
         onclick="document.getElementById('id01').style.display='block'"
         class="circle share tooltip"
       >
-        <i class="fas fa-share fa-3x"></i>
+        <i class="fas fa-paper-plane fa-3x"></i>
         <span class="tooltiptext">Share files</span>
       </div>
     </div>
@@ -657,15 +727,43 @@
         </div>
         <h5>Files</h5>
         <div>
-          <a class="w3-button w3-light-grey" href="#">
-            <i class="w3-margin-right fa fa-file-pdf"></i>TGIP Brief.pdf
-          </a>
-          <a class="w3-button w3-light-grey" href="#">
-            <i class="w3-margin-right fa fa-file-pdf"></i>TGIP Report.pdf
-          </a>
-          <a class="w3-button w3-light-grey" href="#">
-            <i class="w3-margin-right fa fa-file-excel"></i>Finances.xlsx
-          </a>
+          <table>
+            <tr class="column-row">
+              <th><h6>Name</h6></th>
+              <th><h6>Last Used</h6></th>
+              <th><h6>Size</h6></th>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-pdf"></i>TGIP Brief.pdf</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-pdf"></i>TGIP Report.pdf</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-excel"></i>Finances.xlsx</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-excel"></i>FileA.xlsx</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-excel"></i>FileB.xlsx</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-excel"></i>FileC.xlsx</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+          </table>
         </div>
       </div>
 
@@ -714,16 +812,44 @@
         </div>
         <h5>Files</h5>
         <div>
-          <a class="w3-button w3-light-grey" href="#">
-            <i class="w3-margin-right fa fa-file-pdf"></i>5DPC Assessment
-            Outline.pdf
-          </a>
-          <a class="w3-button w3-light-grey" href="#">
-            <i class="w3-margin-right fa fa-file-pdf"></i>5DPC Brief.pd
-          </a>
-          <a class="w3-button w3-light-grey" href="#">
-            <i class="w3-margin-right fa fa-file-excel"></i>Finances.xlsx
-          </a>
+          <table>
+            <tr class="column-row">
+              <th><h6>Name</h6></th>
+              <th><h6>Last Used</h6></th>
+              <th><h6>Size</h6></th>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-pdf"></i>5DPC Assessment Brief.pdf</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-pdf"></i>5DPC Brief.pdf</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-excel"></i>Finances.xlsx</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-excel"></i>FileA.xlsx</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-excel"></i>FileB.xlsx</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-excel"></i>FileC.xlsx</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+          </table>
+          
         </div>
       </div>
 
@@ -772,15 +898,43 @@
         </div>
         <h5>Files</h5>
         <div>
-          <a class="w3-button w3-light-grey" href="#">
-            <i class="w3-margin-right fa fa-file-pdf"></i>Assignment Brief.pdf
-          </a>
-          <a class="w3-button w3-light-grey" href="#">
-            <i class="w3-margin-right fa fa-file-pdf"></i>Brainstorm.pdf
-          </a>
-          <a class="w3-button w3-light-grey" href="#">
-            <i class="w3-margin-right fa fa-file-pdf"></i>Sketch.pdf
-          </a>
+          <table>
+            <tr class="column-row">
+              <th><h6>Name</h6></th>
+              <th><h6>Last Used</h6></th>
+              <th><h6>Size</h6></th>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-pdf"></i>Assignment Brief.pdf</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-pdf"></i>Brainstorm.pdf</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-pdf"></i>Sketch.pdf</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-excel"></i>FileA.xlsx</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-excel"></i>FileB.xlsx</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-excel"></i>FileC.xlsx</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+          </table>
         </div>
       </div>
 
@@ -829,15 +983,44 @@
         </div>
         <h5>Files</h5>
         <div>
-          <a class="w3-button w3-light-grey" href="#">
-            <i class="w3-margin-right fa fa-file-pdf"></i>Assignment Brief.pdf
-          </a>
-          <a class="w3-button w3-light-grey" href="#">
-            <i class="w3-margin-right fa fa-file-pdf"></i>Usage data.pdf
-          </a>
-          <a class="w3-button w3-light-grey" href="#">
-            <i class="w3-margin-right fa fa-file-pdf"></i>Sketch.pdf
-          </a>
+          <table>
+            <tr class="column-row">
+              <th><h6>Name</h6></th>
+              <th><h6>Last Used</h6></th>
+              <th><h6>Size</h6></th>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-pdf"></i>Assignment Brief.pdf</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-pdf"></i>Usage Data.pdf</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-pdf"></i>Sketch.pdf</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-excel"></i>FileA.xlsx</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-excel"></i>FileB.xlsx</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-excel"></i>FileC.xlsx</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+          </table>
+          
         </div>
       </div>
 
@@ -886,15 +1069,45 @@
         </div>
         <h5>Files</h5>
         <div>
-          <a class="w3-button w3-light-grey" href="#">
-            <i class="w3-margin-right fa fa-file-pdf"></i>Assignment Brief.pdf
-          </a>
-          <a class="w3-button w3-light-grey" href="#">
-            <i class="w3-margin-right fa fa-file-pdf"></i>Usage data.pdf
-          </a>
-          <a class="w3-button w3-light-grey" href="#">
-            <i class="w3-margin-right fa fa-file-pdf"></i>Sketch.pdf
-          </a>
+          <table>
+            <tr class="column-row">
+              <th><h6>Name</h6></th>
+              <th><h6>Last Used</h6></th>
+              <th><h6>Size</h6></th>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-pdf"></i>Assignment Brief.pdf</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-pdf"></i>Brainstorm.pdf</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-pdf"></i>Sketch.pdf</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-excel"></i>FileA.xlsx</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-excel"></i>FileB.xlsx</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+            <tr class="file-row">
+              <td><i class="w3-margin-right fa fa-file-excel"></i>FileC.xlsx</td>
+              <td>DD/MM/YY</td>
+              <td>100kB</td>
+            </tr>
+          </table>
+          
+        </table>
         </div>
       </div>
     </div>
@@ -948,7 +1161,7 @@
       closeUnimplementedPopup();
 
       // Changes the main page content depending on the chosen project
-      function doShare(fileName, team, project, element) {
+      function doShare(fileName, team, project) {
         var i;
         var x = document.getElementsByClassName("file");
         for (i = 0; i < x.length; i++) {
